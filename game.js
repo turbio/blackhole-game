@@ -15,8 +15,6 @@ function setupGame(){
 			foundHoles[c].addEventListener('click', holeClick);
 		}
 	}
-
-	endGame();
 }
 
 function holeClick(hole){
@@ -38,16 +36,41 @@ function holeClick(hole){
 }
 
 function endGame(){
-	var unchosen = document.querySelectorAll('.hole:not(.chosen)')[0];
-	console.log(unchosen);
-	unchosen.removeEventListener('click', holeClick);
-	unchosen.classList.add('black');
+	var blackhole = document.querySelectorAll('.hole:not(.chosen)')[0];
+	blackhole.removeEventListener('click', holeClick);
+	blackhole.classList.add('black');
 
-	var surround = getSurrounding(unchosen);
-	surround.forEach(function(elem){
-		elem.style.top = '20px';
-		elem.style.left = '20px';
+	var holex = blackhole.getAttribute('data-x');
+	var holey = blackhole.getAttribute('data-y');
+
+	var blueScoreNum = 0;
+	var redScoreNum = 0;
+
+	getSurrounding(blackhole).forEach(function(elem){
+		if(elem.classList.contains('red')){
+			redScoreNum += parseInt(elem.innerHTML);
+		}else if(elem.classList.contains('blue')){
+			blueScoreNum += parseInt(elem.innerHTML);
+		}
 	});
+
+	var redScore = document.getElementById('red-score');
+	var blueScore = document.getElementById('blue-score');
+
+	redScore.innerHTML = redScoreNum;
+	blueScore.innerHTML = blueScoreNum;
+	redScore.style.visibility = blueScore.style.visibility = 'visible';
+
+
+	var banner = document.getElementById('winner-banner');
+	if(redScoreNum > blueScoreNum){
+		banner.innerHTML = 'blue wins!';
+		banner.classList.add('blue');
+	}else if(redScoreNum < blueScoreNum){
+		banner.innerHTML = 'red wins';
+		banner.classList.add('red');
+	}
+	banner.style.visibility = 'visible';
 }
 
 function getSurrounding(hole){

@@ -10,6 +10,7 @@ body{
 }
 
 #game-board{
+	position: relative;
 	z-index: 1;
 	padding: 1em;
 	background: #eee;
@@ -39,10 +40,7 @@ body{
 
 	color: rgba(255, 255, 255, 0);
 	font-size: 4vw;
-	transition: background .2s, transform .5s, color .5s, top 2s, left 2s;
-	top: 0;
-	left: 0;
-	position: relative;
+	transition: background .2s, transform .5s, color .5s;
 }
 
 .hole:hover:not(.chosen):not(.black){
@@ -74,4 +72,37 @@ body{
 	-webkit-transform: scale(2.5);
 	-moz-transform: scale(2.5);
 
+}
+
+.score{
+	position: absolute;
+	top: 0;
+	margin: 5vw;
+	padding: 2vw;
+	color: white;
+	font-size: 3vw;
+	border-radius: .5vw;
+	box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+	visibility: hidden;
+}
+
+#red-score{
+	left: 0;
+}
+
+#blue-score{
+	right: 0;
+}
+
+#winner-banner{
+	z-index: 4;
+	position: absolute;
+	top: 1vw;
+	left: 0;
+	right: 0;
+	margin: 10vw;
+	color: white;
+	text-align: center;
+	font-size: 2em;
+	background: teal;
 }
