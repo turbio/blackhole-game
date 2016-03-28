@@ -9,9 +9,8 @@ body{
 	font-family: sans-serif;
 }
 
-#game-board{
+.board{
 	position: relative;
-	z-index: 1;
 	padding: 1em;
 	background: #eee;
 	box-shadow: 0 0 5px rgba(0, 0, 0, .5);
@@ -19,12 +18,19 @@ body{
 	height: 50vw;
 }
 
+#game-board{
+	display: none;
+	z-index: 1;
+}
+
 .row{
 	display: flex;
 	justify-content: center;
+
 }
 
 .hole{
+	position: relative;
 	z-index: 3;
 	margin: 1%;
 	width: 14.666%;
@@ -40,7 +46,7 @@ body{
 
 	color: rgba(255, 255, 255, 0);
 	font-size: 4vw;
-	transition: background .2s, transform .5s, color .5s;
+	transition: background .2s, transform .5s, color .5s, top .5s, left .5s, right .5s;
 }
 
 .hole:hover:not(.chosen):not(.black){
@@ -65,13 +71,80 @@ body{
 	background: #33e;
 }
 
+@keyframes blackhole-pulse{
+	0% { }
+	50% {
+		background: #445;
+		/*transform: scale(2.2);*/
+	}
+	100% { }
+}
+
 .black{
 	z-index: 2;
 	background: #556;
 	transform: scale(2.5);
 	-webkit-transform: scale(2.5);
 	-moz-transform: scale(2.5);
+	animation: blackhole-pulse 6s .5s infinite ease-in-out;
+}
 
+#menu-board{
+	display: table;
+}
+
+.menu-side{
+	display: table-row;
+	color: #555;
+	font-size: 5vw;
+	text-align: center;
+}
+
+.blue-fg{
+	color: blue;
+}
+
+.red-fg{
+	color: red;
+}
+
+.menu-side span{
+	display: table-cell;
+}
+
+button{
+	font-size: 5vw;
+	background: teal;
+	color: #fff;
+	border: none;
+	box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+	border-radius: .5vw;
+	padding: 1vw;
+	transition: box-shadow .2s;
+	cursor: pointer;
+}
+
+button:hover{
+	box-shadow: 1px 1px 7px rgba(0, 0, 0, .5);
+}
+
+input[type=radio]{
+	display: none;
+}
+
+label{
+	cursor: pointer;
+	color: #bbb;
+	background: white;
+	box-shadow: inset 0 0 5px rgba(0, 0, 0, .5);
+	padding: 10px;
+	display: inline-block;
+}
+
+input[type=radio]:checked + label{
+	box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+	color: white;
+	background: teal;
 }
 
 .score{
@@ -105,4 +178,10 @@ body{
 	text-align: center;
 	font-size: 2em;
 	background: teal;
+	opacity: 0;
+	transition: opacity 5s;
+}
+
+.swing{
+	box-shadow: inset 0 0 0 .5vw #fff;
 }

@@ -5,10 +5,29 @@
 	<script src="game.js" type="text/javascript"></script>
 </head>
 <body onload='setupGame()'>
-	<div id="game-board">
-		<div id="red-score" class="score red"></div>
+	<div id="menu-board" class="board">
+		<div class="menu-side">
+			<span class="blue-fg">Blue:</span>
+			<input id="blue-radio-human" type="radio" name="blue-player" value="human" checked="checked">
+			<label for="blue-radio-human">Human</label>
+			<input id="blue-radio-ai" type="radio" name="blue-player" value="ai">
+			<label for="blue-radio-ai">AI</label>
+		</div>
+		<div class="menu-side">
+			<span class="red-fg">Red:</span>
+			<input id="red-radio-human" type="radio" name="red-player" value="human" checked="checked">
+			<label for="red-radio-human">Human</label>
+			<input id="red-radio-ai" type="radio" name="red-player" value="ai">
+			<label for="red-radio-ai">AI</label>
+		</div>
+		<div class="menu-side">
+			<button id="begin-button">Begin</button>
+		</div>
+	</div>
+	<div id="game-board" class="board">
 		<div id="blue-score" class="score blue"></div>
-		<div id="winner-banner" class="score">tie?</div>
+		<div id="red-score" class="score red"></div>
+		<div id="winner-banner" class="score red">tie?</div>
 		<div class="row">
 			<div class="hole"></div>
 		</div>

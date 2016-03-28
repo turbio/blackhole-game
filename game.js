@@ -15,6 +15,11 @@ function setupGame(){
 			foundHoles[c].addEventListener('click', holeClick);
 		}
 	}
+
+	document.getElementById('begin-button').addEventListener('click', function(){
+		document.getElementById('menu-board').style.display = 'none';
+		document.getElementById('game-board').style.display = 'block';
+	});
 }
 
 function holeClick(hole){
@@ -52,6 +57,7 @@ function endGame(){
 		}else if(elem.classList.contains('blue')){
 			blueScoreNum += parseInt(elem.innerHTML);
 		}
+		elem.classList.add('swing');
 	});
 
 	var redScore = document.getElementById('red-score');
@@ -88,7 +94,6 @@ function getSurrounding(hole){
 			}
 		}
 	}
-
 
 	return surrounding;
 }
