@@ -11,7 +11,7 @@ body{
 
 .board{
 	position: relative;
-	padding: 1em;
+	padding: 1vw;
 	background: #eee;
 	box-shadow: 0 0 5px rgba(0, 0, 0, .5);
 	width: 50vw;
@@ -86,30 +86,42 @@ body{
 	transform: scale(2.5);
 	-webkit-transform: scale(2.5);
 	-moz-transform: scale(2.5);
-	animation: blackhole-pulse 6s .5s infinite ease-in-out;
+	/*animation: blackhole-pulse 6s .5s infinite ease-in-out;*/
 }
 
 #menu-board{
 	display: table;
 }
 
+/*.menu-side{*/
+	/*display: table-row;*/
+	/*color: #555;*/
+	/*font-size: 5vw;*/
+	/*text-align: center;*/
+/*}*/
+
 .menu-side{
-	display: table-row;
-	color: #555;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 2vw;
+	padding: 2vw;
+
+	color: #fff;
 	font-size: 5vw;
 	text-align: center;
 }
 
-.blue-fg{
-	color: blue;
+.menu-side div{
+	display: flex;
 }
 
-.red-fg{
-	color: red;
+.menu-side.blue{
+	background: rgba(0, 0, 255, .5);
 }
 
-.menu-side span{
-	display: table-cell;
+.menu-side.red{
+	background: rgba(255, 0, 0, .5);
 }
 
 button{
@@ -136,13 +148,13 @@ label{
 	cursor: pointer;
 	color: #bbb;
 	background: white;
-	box-shadow: inset 0 0 5px rgba(0, 0, 0, .5);
-	padding: 10px;
-	display: inline-block;
+	box-shadow: inset 0 0 5px rgba(0, 0, 0, .3);
+	padding: 1vw;
+	/*display: block;*/
 }
 
 input[type=radio]:checked + label{
-	box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+	box-shadow: 0 0 5px rgba(0, 0, 0, .3);
 	color: white;
 	background: teal;
 }
@@ -176,7 +188,7 @@ input[type=radio]:checked + label{
 	margin: 10vw;
 	color: white;
 	text-align: center;
-	font-size: 2em;
+	font-size: 2vw;
 	background: teal;
 	opacity: 0;
 	transition: opacity 5s;

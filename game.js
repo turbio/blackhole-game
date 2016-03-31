@@ -4,6 +4,9 @@ var first_turn = RED_TURN;
 var turn = first_turn;
 var turn_num = 1;
 
+var blue_player = null;
+var red_player = null;
+
 function setupGame(){
 	var rows = document.querySelectorAll('.row');
 	for(var r = 0; r < rows.length; r++){
@@ -12,19 +15,29 @@ function setupGame(){
 		for(var c = 0; c < foundHoles.length; c++){
 			foundHoles[c].setAttribute('data-y', r);
 			foundHoles[c].setAttribute('data-x', c);
-			foundHoles[c].addEventListener('click', holeClick);
+			foundHoles[c].addEventListener('click', chooseHole);
 		}
 	}
 
 	document.getElementById('begin-button').addEventListener('click', function(){
+		if(document.getElementById('red-radio-ai').checked){
+			red_player = 'ai';
+		}else if(document.getElementById('red-radio-human').checked){
+			red_player = 'human';
+		}
+		if(document.getElementById('blue-radio-ai').checked){
+			blue_player = 'ai';
+		}else if(document.getElementById('blue-radio-human').checked){
+			blue_player = 'human';
+		}
 		document.getElementById('menu-board').style.display = 'none';
 		document.getElementById('game-board').style.display = 'block';
 	});
 }
 
-function holeClick(hole){
+function chooseHole(hole){
 	hole = hole.target;
-	hole.removeEventListener('click', holeClick);
+	hole.removeEventListener('click', chooseHole);
 	hole.classList.add((turn == RED_TURN) ? 'red' : 'blue');
 	hole.classList.add('chosen');
 
@@ -42,7 +55,7 @@ function holeClick(hole){
 
 function endGame(){
 	var blackhole = document.querySelectorAll('.hole:not(.chosen)')[0];
-	blackhole.removeEventListener('click', holeClick);
+	blackhole.removeEventListener('click', chooseHole);
 	blackhole.classList.add('black');
 
 	var holex = blackhole.getAttribute('data-x');
@@ -77,6 +90,7 @@ function endGame(){
 		banner.classList.add('red');
 	}
 	banner.style.visibility = 'visible';
+	banner.style.opacity = '1';
 }
 
 function getSurrounding(hole){
