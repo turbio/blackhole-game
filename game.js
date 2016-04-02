@@ -15,7 +15,7 @@ function setupGame(){
 		for(var c = 0; c < foundHoles.length; c++){
 			foundHoles[c].setAttribute('data-y', r);
 			foundHoles[c].setAttribute('data-x', c);
-			foundHoles[c].addEventListener('click', chooseHole);
+			foundHoles[c].addEventListener('click', clickHole);
 		}
 	}
 
@@ -35,9 +35,12 @@ function setupGame(){
 	});
 }
 
+function clickHole(event){
+	chooseHole(event.target);
+}
+
 function chooseHole(hole){
-	hole = hole.target;
-	hole.removeEventListener('click', chooseHole);
+	hole.removeEventListener('click', clickHole);
 	hole.classList.add((turn == RED_TURN) ? 'red' : 'blue');
 	hole.classList.add('chosen');
 
@@ -49,8 +52,11 @@ function chooseHole(hole){
 		}
 	}
 
-
 	turn = !turn;
+
+	if(turn == BLUE_TURN){
+		chooseHole(nextMove(readBoard(), 'blue'));
+	}
 }
 
 function endGame(){
@@ -110,4 +116,26 @@ function getSurrounding(hole){
 	}
 
 	return surrounding;
+}
+
+function readBoard(){
+	var domHoles = document.querySelectorAll('.hole');
+	var holes = [];
+	for(var i = 0; i < domHoles.length; i++){
+		var classes = domHoles[i].classList;
+		var owner = null;
+		if(classes.contains('red')){
+			owner = 'red';
+		}
+		if(classes.contains('blue')){
+			owner = 'blue';
+		}
+		holes.push({
+			owner: owner,
+			value: parseInt(domHoles[i].innerHTML) || null,
+			index: i,
+		});
+	}
+
+	return holes;
 }
